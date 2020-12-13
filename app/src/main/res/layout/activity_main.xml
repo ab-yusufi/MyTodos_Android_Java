@@ -5,44 +5,68 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     >
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:paddingBottom="50dp"
-        android:foregroundGravity="center"
-        >
-
-    </androidx.recyclerview.widget.RecyclerView>
-
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="@drawable/border"
-        >
-        <EditText
-            android:id="@+id/etTodo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="20"
-            android:hint="Enter Todo..."
-            />
-        <Button
-            android:id="@+id/btnAddTodo"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            android:textColor="#FFF"
-            android:background="#30336B"
-            />
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+        <LinearLayout
+            android:id="@+id/topLinear"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:id="@+id/btnUI"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="URGENT \n IMPORTANT"
+                android:textSize="22dp"
+                />
+            <Button
+                android:id="@+id/btnNUI"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="NOT URGENT \n IMPORTANT"
+                android:textSize="22dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomLinear"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/btnUNI"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="URGENT \n NOT IMPORTANT"
+                android:textSize="22dp"
+                />
+
+            <Button
+                android:id="@+id/btnNUNI"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:text="NOT URGENT \n NOT IMPORTANT"
+                android:textSize="22dp"
+                />
+        </LinearLayout>
 
 
     </LinearLayout>
+
 
 </RelativeLayout>

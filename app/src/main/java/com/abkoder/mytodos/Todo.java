@@ -8,18 +8,45 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "todo_table")
 public class Todo {
 
+
+
     @PrimaryKey()
     @NonNull()
     @ColumnInfo(name = "todo")
-    private String mTodo;
+    private String todo;
 
-    public Todo(@NonNull String todo){
-        this.mTodo = todo;
+    @ColumnInfo(name = "isui")
+    private String isUI;
+
+    public Todo(@NonNull String todo, @NonNull String isUI){
+        this.todo = todo;
+        this.isUI = isUI;
     }
 
-    public String getTodo(){
-        return this.mTodo;
+    //GETTERS
+
+
+    public String getTodo() {
+        return todo;
     }
+
+    public void setmTodo(@NonNull String mTodo) {
+        this.todo = mTodo;
+    }
+
+    public String getIsUI() {
+        return isUI;
+    }
+
+    public void setIsUI(String UI) {
+        isUI = UI;
+    }
+
+
+    //SETTERS
+
+
+
 
 
 

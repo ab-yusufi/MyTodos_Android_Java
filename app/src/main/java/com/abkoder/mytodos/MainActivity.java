@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,10 +24,11 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TodoViewModel mTodoViewModel;
-    private Button mButton;
-    private EditText mEditText;
-    private TextView mTextView;
+    private Button btnUI;
+    private Button btnNUI;
+    private Button btnUNI;
+    private Button btnNUNI;
+    public static String checkIt = "";
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -34,59 +36,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mButton = findViewById(R.id.btnAddTodo);
-        mEditText = findViewById(R.id.etTodo);
-        mTextView = findViewById(R.id.todo);
+        btnUI = findViewById(R.id.btnUI);
+        btnNUI = findViewById(R.id.btnNUI);
+        btnUNI = findViewById(R.id.btnUNI);
+        btnNUNI = findViewById(R.id.btnNUNI);
 
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        final TodoListAdapter adapter = new TodoListAdapter(new TodoListAdapter.TodoDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //Get new or existing model
-        mTodoViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(TodoViewModel.class);
-
-        // Add an observer on the LiveData returned by getAlphabetizedWords.
-        // The onChanged() method fires when the observed data changes and the activity is
-        // in the foreground.
-        mTodoViewModel.getAllTodos().observe(this, todos -> {
-            // Update the cached copy of the words in the adapter.
-            adapter.submitList(todos);
-        });
-
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String mTodo = mEditText.getText().toString();
-                if(mTodo.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "No Input Provided", Toast.LENGTH_SHORT).show();
-                } else {
-                    Todo todo = new Todo(mTodo);
-                    mTodoViewModel.insert(todo);
-                    mEditText.setText("");
-                }
-            }
-        });
-
-
-        ItemTouchHelper helper = new ItemTouchHelper(
-                new ItemTouchHelper.SimpleCallback(0,
-                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-                    @Override
-                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                        return false;
-                    }
-
-                    @Override
-                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                        int position = viewHolder.getAdapterPosition();
-                        Todo myTodo = adapter.getTodoAtPosition(position);
-                        mTodoViewModel.deleteTodo(myTodo);
-                        Toast.makeText(MainActivity.this, "DELETED", Toast.LENGTH_SHORT).show();
-                    }
-                });
-        helper.attachToRecyclerView(recyclerView);
+        btnUI.setOnClickListener(this::openUrgentImportant);
+        btnNUI.setOnClickListener(this::openNotUrgentImportant);
+        btnUNI.setOnClickListener(this::openUrgentNotImportant);
+        btnNUNI.setOnClickListener(this::openNotUrgentNotImportant);
 
     }
+
+    public void openUrgentImportant(View v){
+        checkIt = "UI";
+        Intent intent = new Intent(getApplicationContext(), UrgentImportant.class);
+        startActivity(intent);
+    }
+
+    public void openNotUrgentImportant(View v){
+        checkIt = "NUI";
+        Intent intent = new Intent(getApplicationContext(), UrgentImportant.class);
+        startActivity(intent);
+    }
+
+    public void openUrgentNotImportant(View v){
+        checkIt = "UNI";
+        Intent intent = new Intent(getApplicationContext(), UrgentImportant.class);
+        startActivity(intent);
+    }
+
+    public void openNotUrgentNotImportant(View v){
+        checkIt = "NUNI";
+        Intent intent = new Intent(getApplicationContext(), UrgentImportant.class);
+        startActivity(intent);
+    }
+
 }

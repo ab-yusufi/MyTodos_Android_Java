@@ -20,6 +20,18 @@ public interface TodoDao {
     @Query("SELECT * FROM todo_table")
     LiveData<List<Todo>> getTodos();
 
+    @Query("SELECT * FROM todo_table WHERE isui='UI'")
+    LiveData<List<Todo>> getUITodos();
+
+    @Query("SELECT * FROM todo_table WHERE isui='NUI'")
+    LiveData<List<Todo>> getNUITodos();
+
+    @Query("SELECT * FROM todo_table WHERE isui='UNI'")
+    LiveData<List<Todo>> getUNITodos();
+
+    @Query("SELECT * FROM todo_table WHERE isui='NUNI'")
+    LiveData<List<Todo>> getNUNITodos();
+
     @Delete
     void deleteTodo(Todo todo);
 }

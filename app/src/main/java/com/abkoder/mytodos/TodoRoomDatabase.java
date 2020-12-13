@@ -26,6 +26,7 @@ abstract class TodoRoomDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TodoRoomDatabase.class, "todo_database")
                             .addCallback(sRoomDatabaseCallback)
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
@@ -40,6 +41,9 @@ abstract class TodoRoomDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 TodoDao dao = INSTANCE.todoDao();
                 dao.deleteAll();
+
+                Todo todo = new Todo("A TODO", "UI");
+                dao.insert(todo);
             });
         }
     };
